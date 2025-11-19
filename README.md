@@ -55,6 +55,13 @@ MYSQL_USER=your_username
 MYSQL_PASSWORD=your_password
 MYSQL_DATABASE=your_db_name
 MYSQL_PORT=your_port
+DB_USE_SSL=true/false
+DB_SSL_CA=-----BEGIN CERTIFICATE-----
+...........................................
+...........................................
+...........................................
+-----END CERTIFICATE-----
+
 ```
 
 ### 4. Database Schema

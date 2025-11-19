@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Jernialo, Hejhdiss
+// Licensed under the GNU GPLv3: https://www.gnu.org/licenses/gpl-3.0.html
+
 import mysql from 'mysql2/promise';
 
 // NOTE: Uses the same DB_CONFIG setup

@@ -1,3 +1,7 @@
+// Copyright (c) 2025 Jernialo, Hejhdiss
+// Licensed under the GNU GPLv3: https://www.gnu.org/licenses/gpl-3.0.html
+
+
 import React, { useState, useEffect, useCallback } from 'react';
 
 const MAX_NOTE_LENGTH = 400;

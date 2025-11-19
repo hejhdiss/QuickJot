@@ -54,6 +54,7 @@ MYSQL_HOST=localhost
 MYSQL_USER=your_username
 MYSQL_PASSWORD=your_password
 MYSQL_DATABASE=your_db_name
+MYSQL_PORT=your_port
 ```
 
 ### 4. Database Schema

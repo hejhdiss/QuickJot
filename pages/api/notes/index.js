@@ -4,9 +4,9 @@
 import mysql from 'mysql2/promise';
 import fs from "fs";
 import path from "path";
-
+let sslConfig = false;
 export async function connectDB() {
-  let sslConfig = false;
+  
 
   if (process.env.DB_USE_SSL === "true") {
 
@@ -34,7 +34,7 @@ export async function connectDB() {
       };
     }
   }
-
+}
 // NOTE: You MUST set these as environment variables (e.g., in a .env.local file or Vercel settings)
 const DB_CONFIG = {
     host: process.env.MYSQL_HOST,

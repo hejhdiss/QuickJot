@@ -4,9 +4,9 @@
 import mysql from 'mysql2/promise';
 import fs from "fs";
 import path from "path";
-
+let sslConfig = false;
 export async function connectDB() {
-  let sslConfig = false;
+  
 
   if (process.env.DB_USE_SSL === "true") {
 
@@ -33,6 +33,7 @@ export async function connectDB() {
         rejectUnauthorized: false,
       };
     }
+  }
   }
 // NOTE: Uses the same DB_CONFIG setup
 const DB_CONFIG = {

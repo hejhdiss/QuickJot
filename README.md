@@ -2,6 +2,9 @@
 
 QuickJot is a simple, full-stack application designed for quickly saving and retrieving short, temporary notes. It uses a clean, modern UI inspired by Apple and Notion design language. Notes are stored in a MySQL database and accessed via a unique, 6-character ID.
 
+> Just try this id:CB7R0m - may be be changed by others.
+
+
 ## ✨ Features
 
 * **Quick Save**: Easily publish a new note (up to 400 characters).

@@ -5,36 +5,30 @@ import mysql from 'mysql2/promise';
 import fs from "fs";
 import path from "path";
 let sslConfig = false;
-export async function connectDB() {
-  
 
-  if (process.env.DB_USE_SSL === "true") {
+function loadSSL() {
+    if (process.env.DB_USE_SSL !== "true") return false;
 
-    // IF USING CA CERTIFICATE
-    if (process.env.DB_SSL_CA) {
-      let caPath = process.env.DB_SSL_CA;
+    // Normalize certificate (fixes Vercel escaping)
+    const rawCA = process.env.DB_SSL_CA;
+    const cert = rawCA?.replace(/\\n/g, '\n').trim();
 
-      // Vercel: write cert to /tmp if content is stored in env
-      if (process.env.DB_SSL_CA.startsWith("-----BEGIN CERTIFICATE-----")) {
-        caPath = path.join("/tmp", "ca.pem");
-
-        if (!fs.existsSync(caPath)) {
-          fs.writeFileSync(caPath, process.env.DB_SSL_CA);
-        }
-      }
-
-      sslConfig = {
-        ca: fs.readFileSync(caPath),
-      };
-
-    } else {
-      // SSL without certificate (Aiven supports this)
-      sslConfig = {
-        rejectUnauthorized: false,
-      };
+    // CASE 1: CA cert is inside ENV variable
+    if (cert && cert.includes("BEGIN CERTIFICATE")) {
+        return { ca: cert };
     }
-  }
-  }
+
+    // CASE 2: CA path provided (local or /tmp)
+    if (process.env.DB_SSL_CA && fs.existsSync(process.env.DB_SSL_CA)) {
+        const caContent = fs.readFileSync(process.env.DB_SSL_CA, "utf8");
+        return { ca: caContent };
+    }
+
+    // CASE 3: no CA (Aiven)
+    return { rejectUnauthorized: false };
+}
+
+sslConfig = loadSSL();
 const DB_CONFIG = {
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
